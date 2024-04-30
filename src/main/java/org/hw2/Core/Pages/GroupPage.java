@@ -1,6 +1,5 @@
 package org.hw2.Core.Pages;
 
-import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.enabled;
@@ -8,7 +7,6 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class GroupPage extends BasePage {
-    private static final String URL_GROUP_PAGE = "/group/70000005781564";
     private static final By GROUP_NAME = By.xpath(".//div[@class='group-name_t']");
     private static final By GROUP_CATEGORY = By.xpath(".//div[@class='group-name_info']");
     private static final By GROUP_AVATAR = By.xpath(".//div[@class='entity-avatar']");
@@ -33,7 +31,7 @@ public class GroupPage extends BasePage {
     private static final String SAVE_SETTINGS_FOR_RENAME_GROUP = "Button save settings should be enabled for rename group";
 
     public GroupPage() {
-        this.open().checkPage();
+        this.checkPage();
     }
 
     @Override
@@ -43,12 +41,6 @@ public class GroupPage extends BasePage {
         $(GROUP_AVATAR).shouldBe(enabled.because(GROUP_AVATAR_ON_GROUP_PAGE));
         $(ABOUT_GROUP).shouldBe(enabled.because(ABOUT_GROUP_ON_GROUP_PAGE));
         $(GROUP_MEMBERS).shouldBe(enabled.because(GROUP_MEMBERS_ON_GROUP_PAGE));
-        return this;
-    }
-
-    @Override
-    public GroupPage open() {
-        Selenide.open(URL_GROUP_PAGE);
         return this;
     }
 

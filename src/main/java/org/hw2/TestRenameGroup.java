@@ -1,6 +1,7 @@
 package org.hw2;
 
 import org.hw2.Core.Pages.GroupPage;
+import org.hw2.Core.Pages.MainPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,12 +10,14 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class TestRenameGroup extends BeforeTestLogin {
+    MainPage mainPage;
     GroupPage groupPage;
     String oldName;
 
     @BeforeEach
     public void createGroupPage() {
-        groupPage = new GroupPage();
+        mainPage = new MainPage();
+        groupPage = mainPage.openTestGroup();
         oldName = groupPage.getGroupName();
     }
 

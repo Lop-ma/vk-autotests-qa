@@ -18,11 +18,8 @@ public class TestPutLike extends BeforeTestLogin {
     @BeforeEach
     public void createMainPage() {
         mainPage = new MainPage();
-        String textInPost = "Some text";
-        mainPage.publishPost(textInPost);
-
-        Selenide.sleep(1000);
-        userPage = new UserPage();
+        userPage = mainPage.publishPost().openUserPage();
+        Selenide.refresh();
     }
 
     @Test
