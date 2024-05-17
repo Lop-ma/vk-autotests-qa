@@ -23,18 +23,16 @@ public class TestPublishPost extends BeforeTestLogin {
     @DisplayName("Test publish post with note from Main page")
     @Tag("post")
     public void testSuccessPublishPost() {
-        String textInPost = "My beautiful post!";
-
         String expectedResult = "Заметка опубликована";
-        String actualResult = mainPage.publishPost(textInPost).getShouldHavePostMessage();
+        String actualResult = mainPage.publishPost().getShouldHavePostMessage();
         String errorMessage = "Post note from Main page failed";
         Assertions.assertEquals(expectedResult, actualResult, errorMessage);
     }
 
     @AfterEach
-    public void clearUserPAge() {
-        Selenide.sleep(1000);
-        userPage = new UserPage();
+    public void clearUserPage() {
+        userPage = mainPage.openUserPage();
+        Selenide.refresh();
         userPage.deleteLastPost();
     }
 }

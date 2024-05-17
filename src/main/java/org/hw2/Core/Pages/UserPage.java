@@ -1,6 +1,5 @@
 package org.hw2.Core.Pages;
 
-import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.enabled;
@@ -8,7 +7,6 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class UserPage extends BasePage {
-    private static final String URL_USER_PAGE = "/profile/603201733180";
     private static final By ACTIVE_MENU_NAME = By.xpath(".//a[@data-l='t,userPage' and contains(@class, 'ac')]");
     private static final By PROFILE_USER_NAME = By.xpath(".//a[@class='profile-user-info_name']");
     private static final By USER_AVATAR = By.xpath(".//div[@class='entity-avatar']");
@@ -34,7 +32,7 @@ public class UserPage extends BasePage {
     private static final String ACTIVE_LIKE_FOR_CHECK_PUT_LIKE = "Active like button should be enabled for check put like on last post";
 
     public UserPage() {
-        this.open().checkPage();
+        this.checkPage();
     }
 
     @Override
@@ -44,12 +42,6 @@ public class UserPage extends BasePage {
         $(USER_AVATAR).shouldBe(enabled.because(USER_AVATAR_ON_USER_PAGE));
         $(ABOUT_USER).shouldBe(enabled.because(ABOUT_USER_ON_USER_PAGE));
         $(FAVORITE_PHOTOS).shouldBe(enabled.because(FAVORITE_PHOTOS_ON_USER_PAGE));
-        return this;
-    }
-
-    @Override
-    public UserPage open() {
-        Selenide.open(URL_USER_PAGE);
         return this;
     }
 

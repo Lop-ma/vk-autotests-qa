@@ -12,15 +12,11 @@ import org.junit.jupiter.api.Test;
 public class TestDeletePost extends BeforeTestLogin {
     MainPage mainPage;
     UserPage userPage;
-
     @BeforeEach
     public void createMainPage() {
         mainPage = new MainPage();
-        String textInPost = "Post for delete :(";
-        mainPage.publishPost(textInPost);
-
-        Selenide.sleep(1000);
-        userPage = new UserPage();
+        userPage = mainPage.publishPost().openUserPage();
+        Selenide.refresh();
     }
 
     @Test
