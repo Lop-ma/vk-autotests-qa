@@ -1,12 +1,13 @@
 package org.hw2.Core.Pages;
 
+import org.hw2.Core.Loadable.LoadablePage;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
-public class GroupPage extends BasePage {
+public class GroupPage extends LoadablePage {
     private static final By GROUP_NAME = By.xpath(".//div[@class='group-name_t']");
     private static final By GROUP_CATEGORY = By.xpath(".//div[@class='group-name_info']");
     private static final By GROUP_AVATAR = By.xpath(".//div[@class='entity-avatar']");
@@ -36,32 +37,50 @@ public class GroupPage extends BasePage {
 
     @Override
     public GroupPage checkPage() {
-        $(GROUP_NAME).shouldBe(visible.because(GROUP_NAME_ON_GROUP_PAGE));
-        $(GROUP_CATEGORY).shouldBe(visible.because(GROUP_CATEGORY_ON_GROUP_PAGE));
-        $(GROUP_AVATAR).shouldBe(enabled.because(GROUP_AVATAR_ON_GROUP_PAGE));
-        $(ABOUT_GROUP).shouldBe(enabled.because(ABOUT_GROUP_ON_GROUP_PAGE));
-        $(GROUP_MEMBERS).shouldBe(enabled.because(GROUP_MEMBERS_ON_GROUP_PAGE));
+        $(GROUP_NAME)
+                .shouldBe(visible.because(GROUP_NAME_ON_GROUP_PAGE));
+        $(GROUP_CATEGORY)
+                .shouldBe(visible.because(GROUP_CATEGORY_ON_GROUP_PAGE));
+        $(GROUP_AVATAR)
+                .shouldBe(enabled.because(GROUP_AVATAR_ON_GROUP_PAGE));
+        $(ABOUT_GROUP)
+                .shouldBe(enabled.because(ABOUT_GROUP_ON_GROUP_PAGE));
+        $(GROUP_MEMBERS)
+                .shouldBe(enabled.because(GROUP_MEMBERS_ON_GROUP_PAGE));
         return this;
     }
 
     private void openSettings() {
-        $(THREE_DOT_MENU).shouldBe(enabled.because(THREE_DOT_MENU_FOR_OPEN_SETTINGS)).click();
-        $(GROUP_SETTINGS).shouldBe(enabled.because(GROUP_SETTINGS_FOR_OPEN_SETTINGS)).click();
+        $(THREE_DOT_MENU)
+                .shouldBe(enabled.because(THREE_DOT_MENU_FOR_OPEN_SETTINGS))
+                .click();
+        $(GROUP_SETTINGS)
+                .shouldBe(enabled.because(GROUP_SETTINGS_FOR_OPEN_SETTINGS))
+                .click();
     }
 
     private void closeSettings() {
-        $(CANCEL_CHANGE).shouldBe(enabled.because(CANCEL_CHANGE_FOR_CLOSE_SETTINGS)).click();
+        $(CANCEL_CHANGE)
+                .shouldBe(enabled.because(CANCEL_CHANGE_FOR_CLOSE_SETTINGS))
+                .click();
     }
 
     public GroupPage renameGroup(String newName) {
         this.openSettings();
-        $(INPUT_NAME).shouldBe(enabled.because(INPUT_NAME_FOR_RENAME_GROUP)).doubleClick().setValue(newName);
-        $(SAVE_SETTINGS).shouldBe(enabled.because(SAVE_SETTINGS_FOR_RENAME_GROUP)).click();
+        $(INPUT_NAME)
+                .shouldBe(enabled.because(INPUT_NAME_FOR_RENAME_GROUP))
+                .doubleClick()
+                .setValue(newName);
+        $(SAVE_SETTINGS)
+                .shouldBe(enabled.because(SAVE_SETTINGS_FOR_RENAME_GROUP))
+                .click();
         this.closeSettings();
         return this;
     }
 
     public String getGroupName() {
-        return $(GROUP_NAME).shouldBe(visible.because(GROUP_NAME_FOR_GET_NAME)).getText();
+        return $(GROUP_NAME)
+                .shouldBe(visible.because(GROUP_NAME_FOR_GET_NAME))
+                .getText();
     }
 }
