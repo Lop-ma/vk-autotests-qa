@@ -1,6 +1,8 @@
-package org.hw2;
+package org.hw2.Tests;
 
+import org.hw2.BaseTest;
 import org.hw2.Core.Pages.LoginPage;
+import org.hw2.Core.ValueObjects.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +13,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class TestLogin extends BaseTest {
     LoginPage loginPage;
+    User user;
 
     @BeforeEach
     public void createLoginPage() {
@@ -21,9 +24,14 @@ public class TestLogin extends BaseTest {
     @DisplayName("Test login to ok.ru with correct data")
     @Tag("login")
     public void testSuccessLogin() {
+        user = new User();
+
         String expectedResult = "technopol68 technopol68";
-        String actualResult = loginPage.login().getShouldHaveName();
+        String actualResult = loginPage
+                .login(user)
+                .getShouldHaveName();
         String errorMessage = "Login user failed";
+
         Assertions.assertEquals(expectedResult, actualResult, errorMessage);
     }
 
@@ -38,7 +46,10 @@ public class TestLogin extends BaseTest {
     @DisplayName("Test login to ok.ru with incorrect data")
     @Tag("login")
     public void testFailLogin(String login, String password, String expectedResult, String errorMessage) {
-        String actualResult = loginPage.failLogin(login, password);
+        user = new User(login, password);
+
+        String actualResult = loginPage
+                .failLogin(user);
         Assertions.assertEquals(expectedResult, actualResult, errorMessage);
     }
 }
